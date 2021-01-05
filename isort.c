@@ -9,7 +9,7 @@ void shift_element(int *arr, int i) {
     for(j = 0; j < i; j++){
         *(arr+i+1-j) = *(arr+i-j);
     }
-    *(arr+1) = 0;
+    //*(arr+1) = 0;
 }
 void insertion_sort(int* arr , int len){
     int temp,i,count,*point = NULL;
