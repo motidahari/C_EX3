@@ -12,7 +12,6 @@ int arr[SIZE];
 
 int similar(char *s, char *t, int n){
 	int sizeS = strlen(s), sizeT = strlen(t), countDif = 0, j = 0, z = n;
-
 	for (int i = 0; *(s + i) != '\0' && *(s + i) != '\n'; i++){
 		if (*(s + i) == *(t + j)){
 			j++;
@@ -120,23 +119,10 @@ int Substring( char * str1, char * str2){
     }
     return 0;
 }
-void searchWordInFile(char *str){
-    char const* const fileName = "find_input.txt";
-    FILE* file = fopen(fileName, "r");
-    char line[256];
-
-    int lines = 0;
-    //printf("sizeof(line) = %ld\n",sizeof(file));
-    while (fgets(line, sizeof(line), file)) {
-        lines++;
-        if(lines >= 3){
-            if(Substring(line,str) == 1){
-                printf("%s", line);
-            }
-            lines++;          
-        }
+void searchWordInFile(char *str,char *line){
+    if(Substring(line,str) == 1){
+        printf("%s", line);
     }
-    fclose(file);
 }
 void checkLine(char *token,char *search){
 	//printf("token = %s, search = %s\n",token,search);
@@ -144,28 +130,18 @@ void checkLine(char *token,char *search){
 		printf("%s\n",token);
 	}
 }
-void searchSimilarWordInFile(char *str, FILE* file){
-    char line[256];
-    int lines = 1;
-
-    while (fgets(line, sizeof(line), file)) {
-        lines++; 
-        if(lines >= 3){
-			char * token = strtok(line, " ");
-			while( token != NULL ) {
-				checkLine(token,str);
-				token = strtok(NULL, " ");
-			}
-        }        
+void searchSimilarWordInFile(char *str,char *line){
+    char * token = strtok(line, " ");
+    while( token != NULL ) {
+        checkLine(token,str);
+        token = strtok(NULL, " ");
     }
-    fclose(file);
 }
-
-void print_lines(char *str){
-    searchWordInFile(str);
+void print_lines(char *str,char *line){
+    searchWordInFile(str,line);
 }
-void print_similar_words(char *str, FILE* file){
-    searchSimilarWordInFile(str,file);
+void print_similar_words(char *str,char *line){
+    searchSimilarWordInFile(str,line);
 }
 
 

@@ -87,6 +87,7 @@ int main () {
             word[j++] = dataLine[i];
             index = i;
         }
+        //printf("word = %s\n",word);
         while (i < strlen(dataLine)){   
             if(dataLine[i] != ' '){
                 flag = dataLine[i];
@@ -94,13 +95,26 @@ int main () {
             }
             i++;
         }
+        //printf("flag = %c\n",flag);
         break;
     }
-    if(flag == 'a'){
-        print_lines(word);
-    }else if(flag == 'b'){
-        print_similar_words(word,file);
+    //printf("after while 1 \n");
+
+    i = 1;
+    while (fgets(line, sizeof(line), stdin)) {
+        i++; 
+        if(i >= 3){
+            if(flag == 'a'){
+                print_lines(word,line);
+            }else if(flag == 'b'){
+                //printf("line = %s\n",line);
+                print_similar_words(word,line);
+            }
+            //printf("line = %s\n",line);
+        }
     }
+
+    
 
     return 0;
 }
